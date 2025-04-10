@@ -30,3 +30,11 @@ grocery_list = eval(input())
 print (grocery_list_request(grocery_list,'total_bill_amount'))
 print(grocery_list_request(grocery_list, 'max_quantity_item'))
 print(grocery_list_request(grocery_list,'sort_by_total_amount'))
+
+
+# max() and sorted() both have  similar syntax i.e (iterable, key)
+# for sorted() key can be any no., it will consider second key for sorting once the first key gives equal values, and so on.
+# Also for string key, sorting is by default based on alphabetical order.
+# key = 'len' (for sorting string based on length)
+# key = -int or (key, Reverse = True)...(for sorting in decreasing order)
+# OBSERVE- def max_quantity_item(grocery_list): ....here the max gives us the item(a dictionary) in grocery list and now "max(...)['name']"...gives us the name key value of that item!
