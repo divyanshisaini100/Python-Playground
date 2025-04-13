@@ -7,5 +7,17 @@ def is_divisible_by_last_two_digits(num: int):
         return True
     return False
 
+
 num = int(input())
 print(is_divisible_by_last_two_digits(num))
+
+# MORE EFFICIENT CODE:
+def is_divisible_by_last_two_digits1(num):
+        
+        a,b = str(num)[-2:]                      #NOTE: how string index is directly converted to var(s)
+        a, b = int(a), int(b)                    # But say a,b = str(num)[-3,]... then python raise an error "TOO MANY VALUES TO UNPACK"....but if var = str indices then python automatically UNPACKS AND ASSIGNS VALUES 
+        return a!=0 and b!=0 and num % a == 0 and num % b == 0
+
+def is_divisible_by_last_two_digits2(num):
+     a,b = map(int, str(num)[-2:])
+     return a!=0 and b!=0 and num%a == 0 and num%b == 0
