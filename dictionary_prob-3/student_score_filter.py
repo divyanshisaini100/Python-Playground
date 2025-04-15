@@ -11,7 +11,56 @@
 # print(filter_students(data, 'all_pass')) # Output: {'Alice', 'Babu', 'Ram'}
 # print(filter_students(data, 'balanced')) # Output: {'Alice', 'Babu'}
 
-def filter_students(data: dict, criteria: str) -> set:
+    
+
+def avg(lst):
+    if not lst:             #tho not req in this case but a good practise still
+        return 0               # or "float(nan)" ... to indicate 'undefined' or 'Not A Number'
+    return sum(lst)/len(lst)
+
+def excellent(data):
+    s = set()
+    for key,value in data.items():
+        if avg(value) >= 85 :
+            s.add(key)
+    return s        
+
+def good(data):
+    s = set()
+    for key,value in data.items():
+        if 50 <= avg(value) < 85 :
+            s.add(key)         
+    return s 
+
+def all_pass(data):
+    s = set()
+    for key,value in data.items():                       
+        if all(i>=50 for i in value):
+            s.add(key)
+    return s       
+    
+# without using 'all' func
+
+def all_pass1(data):
+    s = set()
+    for key,value in data.items():
+        passed = True
+        for i in value:
+            if i<50:
+                passed = False
+                break
+        if passed:
+            s.add(key)
+    return s
+
+def balanced(data):
+    s = set()       
+    for key,value in data.items():
+        if max(value) - min(value) <=10:
+            s.add(key)
+    return s    
+
+def filter_students(data: dict, filter: str) -> set:
     '''
     Takes a dictionary where keys are student names and values are lists of scores, filters names based on the given criteria
      - "excellent" - average score >= 85.
@@ -25,34 +74,17 @@ def filter_students(data: dict, criteria: str) -> set:
     Returns:
         set: Set of roll numbers matching the criteria
     '''
+    if filter == 'balanced':
+        return balanced(data) 
+    if filter == 'all_pass':
+        return all_pass(data) and all_pass1(data)
+    if filter == 'good':
+        return good(data)
+    if filter == 'excellent':
+        return excellent(data)
 
-    def avg(lst):
-        if not lst:             #tho not req in this case but a good practise still
-            return 0               # or "float(nan)" ... to indicate 'undefined' or 'Not A Number'
-        return sum(lst)/len(lst)
-    
-    def excellent(data):
-        s = set()
-        for key,value in data.items():
-            if avg(value) >= 85 :
-                s.add(key)
-        return s        
-
-    def good(data):
-        s = set()
-        for key,value in data.items():
-            if 50 <= avg(value) < 85 :
-                s.add(key)         
-        return s 
-
-    def all_pass(data):
-        s = set()
-        for key,value in data.items():
-            ad = True
-            for i in value:
-                if i < 50 :
-                    ad = False
-                    break 
-
-        return s
-    
+data = eval(input())  
+print (filter_students(data,'good'))  #var needs to be within ' ' quotes
+print (filter_students(data,'all_pass'))
+print (filter_students(data,'excellent'))
+print (filter_students(data,'balanced'))
