@@ -5,7 +5,13 @@
     </head>
     <body>
         <h1> URL Shortener </h1>
-        
-        
+        <form method = 'post' action= '/'>
+            <label for = 'url'>Enter a https:// URL</label>
+            <input type='url'  name = 'url' id = 'url' size = '50' placeholder="https://example.com" pattern = 'https://' value = "{{old_url}}" required>
+            <button type = 'submit' value = 'submit'>submit</button>
+            <br>
+            <label>Generated_URL</label>
+            <input  name = 'Generated_URL' value = '{{new_url}}' style = 'margin-top:10px;margin-left:35px' size='50'/>      
+        </form>      
     </body>
 </html>
